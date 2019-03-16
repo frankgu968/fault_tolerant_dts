@@ -11,6 +11,7 @@ import _thread
 class Scheduler():
     def __init__(self):
         self.db = []
+        self.continue_run = True
 
         # Initialize database connection and collection
         self.slave_col_name = os.getenv("SLAVE_COL_NAME", default="slave")
@@ -41,16 +42,11 @@ class Scheduler():
     def do_schedule_once(self, interval):
         self.connect_db()   # Connect to database before fork
 
-        all_done = False
-        while not all_done:
-            try:
-                # task = Task.objects.get(state="created")
-                task = Task.objects.get(Q(state="created") or Q(state="killed"))
-            except DoesNotExist:
-                logging.info("No incomplete tasks found!")
-                task = None
+        while self.continue_run:
+            task = Task.objects(Q(state="created") | Q(state="killed"))
 
             if task:
+                task = task[0]
                 logging.info("Found pending task: " + task.taskname)
                 try:
                     slave = Slave.objects.get(state="READY")
@@ -63,7 +59,11 @@ class Scheduler():
                     # Dispatch job to slave
                     # Use threads here to share mongoengine connector and process request asynchronously
                     _thread.start_new_thread(self.send_task, (task, slave, ))
+            else:
+                logging.info("All tasks completed!")
             sleep(interval)
+
+        logging.info("Scheduler shutdown requested; shutting down now...")
 
     def send_task(self, task, slave):
         try:
