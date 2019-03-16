@@ -23,7 +23,7 @@ class Slave(Document):
 
     def to_dict(self):
         return {
-            'hash': "something",
+            'hash': self.hash,
             'url': self.url,
             'state': self.state,
         }

@@ -23,8 +23,6 @@ class Scheduler():
             logging.error("Invalid schedule interval, must be (0,N] in seconds")
             exit(1)
 
-        self.start_loop()
-
     def connect_db(self):
         self.db = MongoStorage().get_db()
 
@@ -34,7 +32,7 @@ class Scheduler():
         else:
             logging.info("Previous session metadata found, restoring master")
 
-    def start_loop(self):
+    def start(self):
         logging.info("Starting scheduler loop, interval="+str(self.schedule_interval)+"s")
         scheduler_loop = Process(target=self.do_schedule_once, args=(self.schedule_interval, ))
         scheduler_loop.start()
