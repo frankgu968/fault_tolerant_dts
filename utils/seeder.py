@@ -23,8 +23,7 @@ def seed_db():
 
     # Clean database and recreate
     logging.info("Creating database " + DB_NAME)
-    dblist = client.list_database_names()
-    if DB_NAME in dblist:
+    if DB_NAME in client.list_database_names():
         client.drop_database(DB_NAME)
     new_db = client[DB_NAME]
 
