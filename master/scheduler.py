@@ -44,7 +44,8 @@ class Scheduler():
         all_done = False
         while not all_done:
             try:
-                task = Task.objects.get(state="created")
+                # task = Task.objects.get(state="created")
+                task = Task.objects.get(Q(state="created") or Q(state="killed"))
             except DoesNotExist:
                 logging.info("No incomplete tasks found!")
                 task = None
@@ -60,12 +61,11 @@ class Scheduler():
                 if slave:
                     logging.info("Assigning task " + task.taskname + "to slave " + slave.hash)
                     # Dispatch job to slave
-                    # Use threads here to share mongoengine connector
+                    # Use threads here to share mongoengine connector and process request asynchronously
                     _thread.start_new_thread(self.send_task, (task, slave, ))
             sleep(interval)
 
     def send_task(self, task, slave):
-        print(slave)
         try:
             req = requests.post(slave.url, data=task.to_dict())
             self.assign_cb(req, task, slave)
