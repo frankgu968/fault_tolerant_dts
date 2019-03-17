@@ -3,9 +3,12 @@ import logging
 from models.slave import Slave
 import falcon
 from mongoengine.errors import NotUniqueError
-
+from utils.MongoStorage import MongoStorage
 
 class SlaveResource(object):
+    def __init__(self):
+        self.mongo = MongoStorage()
+
     @staticmethod
     def on_post(req, resp):
         raw_json = req.stream.read()

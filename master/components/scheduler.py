@@ -98,6 +98,7 @@ class Scheduler:
                     # make async request for heartbeat on another thread
                     Thread(target=self.ping_slave_hb, args=(slave,)).start()
             except Exception as e:
+                logging.error("HERE")
                 logging.error("Threading exception in heartbeat sensor" + str(e))
             sleep(interval)
 

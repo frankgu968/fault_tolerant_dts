@@ -3,6 +3,10 @@ import logging
 import falcon
 from components.scheduler import Scheduler
 
+logging.basicConfig(
+        format='%(asctime)s %(levelname)-8s %(message)s',
+        level=logging.DEBUG,
+        datefmt='%Y-%m-%d %H:%M:%S')
 
 class SchedulerResource(object):
     def __init__(self):
