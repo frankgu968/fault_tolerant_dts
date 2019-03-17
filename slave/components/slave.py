@@ -5,7 +5,7 @@ import socket
 import json
 from utils.ResettableTimer import TimerReset
 from time import sleep
-from multiprocessing import Process
+import subprocess
 
 
 def check_positive_integer(test_str, purpose=""):
@@ -20,9 +20,10 @@ class Slave(object):
     def __init__(self):
         # Self aware variables
         self.state = "INIT"
-        self.running = []
+        self.runner = []
         self.task = []
-        self.master_timeout = check_positive_integer(os.getenv("MASTER_TIMEOUT", default="30"), purpose="master timeout")
+        self.run_checker = []
+        self.master_timeout = check_positive_integer(os.getenv("MASTER_TIMEOUT", default="10"), purpose="master timeout")
         self.hb_timer = TimerReset(self.master_timeout, self.master_timeout_handler)
         self.hostname = socket.gethostname()
         self.port = check_positive_integer(os.getenv("SLAVE_PORT", default="8888"), purpose="slave port")
@@ -38,7 +39,8 @@ class Slave(object):
     def register(self, first_loop=True):
         # Continuously try to register itself with the master if the state is in INIT
         req_str = json.dumps({"url": self.url})
-        while self.state == "INIT":
+        registered = False
+        while not registered:
             try:
                 logging.info("Attempting to register with master")
                 req = requests.post(self.master_url, data=req_str)
@@ -49,13 +51,19 @@ class Slave(object):
             body = req.json()
             if req.status_code == requests.codes.ok:
                 # Registered with master, begin state transition
+                registered = True
+                if self.state == "INIT":
+                    self.state = "READY"
+                    self.hash = body["hash"]
 
-                self.state = "READY"
-                self.hash = body["hash"]
-                if first_loop:
-                    self.hb_timer.start()   # Start the master timeout timer
-                else:
-                    self.hb_timer.reset()
+                if not first_loop:
+                    # Since previous timer expired, create new timer object
+                    self.hb_timer.cancel()
+                    # TODO: Fix timer
+                    self.hb_timer = TimerReset(self.master_timeout, self.master_timeout_handler)
+
+                self.hb_timer.start() # Start the master timeout
+
                 logging.info("Slave successfully registered with master; started master timeout=" + \
                              str(self.master_timeout) + "s")
             else:
@@ -65,21 +73,20 @@ class Slave(object):
 
     def master_timeout_handler(self):
         # Connection with master lost
-        self.state = "INIT"     # Reset state
+        logging.info("Master timed out!")
         self.register(first_loop=False)         # Retry registration loop
 
     def run_task(self, task):
         try:
             if self.state == "READY":
-                if (not self.running) or (not self.task):
+                if (not self.runner) or (not self.task):
                     sleeptime = float(task["sleeptime"])
                     if sleeptime < 0:
                         raise ValueError
                     # Use subprocess that can be killed
-                    task["sleeptime"] = sleeptime
                     self.task = task
-                    self.running = Process(target=self.run_func, args=(sleep, self.task,self.finish_task, ))
                     self.state = "RUNNING"
+                    self.runner = subprocess.Popen(["sleep", self.task["sleeptime"]])
                     return True
                 else:
                     logging.error("There is already a task running...")
@@ -89,22 +96,16 @@ class Slave(object):
             logging.error("Task sleeptime definition was not a positive number!")
         return False
 
-    @staticmethod
-    def run_func(func, task, cb):
-        logging.debug("Starting sleep task for " + str(task["sleeptime"]) + " seconds")
-        func(task["sleeptime"])
-        cb(task)
-
-    def finish_task(self, task):
-        # Task completion callback
-        self.state = "DONE"
-
     def done_transition(self):
         self.state = "READY"
         self.task = []
-        self.running = []
+        self.runner = []
 
     def refresh_master_timeout(self):
-        self.hb_timer.reset()
+        self.hb_timer.reset(interval=self.master_timeout)
 
+    def get_state(self):
+        return self.state
 
+    def set_state(self, new_state):
+        self.state = new_state

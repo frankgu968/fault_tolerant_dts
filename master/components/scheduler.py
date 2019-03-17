@@ -115,6 +115,7 @@ class Scheduler:
             slave_reply = json.loads(req.json())
             # On this hb request, slave side would have already set state -> READY
             if slave_reply["state"] == "DONE":
+                logging.info("Slave " + slave.hash + " completed task " + slave_reply["task"]["taskname"])
                 slave.update(hash=slave_reply["hash"], url=slave_reply["url"], state="READY")
                 done_task = Task.objects.get(taskname=slave_reply["task"]["taskname"])
                 done_task.update(state="success", host=slave_reply["hash"])
@@ -140,20 +141,24 @@ class Scheduler:
         logging.warning("Slave " + slave.hash + " has timed out")
         self.remove_slave(slave)
 
-    @staticmethod
-    def remove_slave(slave):
+    def remove_slave(self, slave):
         # Universal method for removing slave and setting its task(s) to "killed state"
-        logging.debug("Removing slave " + slave.hash + " from database")
-        slave_tasks = Task.objects(host=slave.hash, state="running")
-        if slave_tasks:
-            for task_to_kill in slave_tasks:
-                logging.debug("Setting slave " + slave.hash + " task " + task_to_kill.taskname + "to state=killed")
-                task_to_kill.update(state="killed", host="")
-        slave.delete()
+        if self.continue_run:
+            # Only apply changes if the scheduler is still set to running to avoid async behavior due to detached thread
+            logging.debug("Removing slave " + slave.hash + " from database")
+            slave_tasks = Task.objects(host=slave.hash, state="running")
+            if slave_tasks:
+                for task_to_kill in slave_tasks:
+                    logging.debug("Setting slave " + slave.hash + " task " + task_to_kill.taskname + "to state=killed")
+                    task_to_kill.update(state="killed", host="")
+            slave.delete()
+        else:
+            logging.debug("Ignoring delete request for slave " + slave.hash + " since the scheduler has stopped")
 
     def send_task(self, task, slave):
         try:
-            req = requests.post(slave.url, data=task.to_dict())
+            logging.debug("Sending task " + str(task.to_dict()) + " to slave " + slave.hash)
+            req = requests.post(slave.url, json=task.to_dict())
             self.assign_cb(req, task, slave)
         except Exception as e:
             # Slave did not respond correctly, do not change task status
