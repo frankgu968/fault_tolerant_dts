@@ -13,11 +13,16 @@ from ResettableTimer import TimerReset
 # TODO: Change this to use environment
 HB_GRACE_PERIOD = 2.0
 
+
 class Scheduler:
     def __init__(self):
         self.db = []
-        self.continue_run = True
+        self.continue_run = False   # Don't start the scheduler on startup
+
+        # Object containers
         self.hb_timers = {}
+        self.scheduler_loop = []
+        self.heartbeat_loop = []
 
         # Initialize database connection and collection
         self.slave_col_name = os.getenv("SLAVE_COL_NAME", default="slave")
@@ -46,13 +51,20 @@ class Scheduler:
             logging.info("Previous session metadata found, restoring master")
 
     def start(self):
+        self.continue_run = True
         logging.info("Starting scheduler loop, interval="+str(self.schedule_interval)+"s")
-        scheduler_loop = Process(target=self.do_schedule_once, args=(self.schedule_interval, ))
-        scheduler_loop.start()
+        self.scheduler_loop = Process(target=self.do_schedule_once, args=(self.schedule_interval, ))
+        self.scheduler_loop.start()
 
         logging.info("Starting heartbeat sensor, interval="+str(self.heartbeat_interval)+"s")
-        heartbeat_loop = Process(target=self.heartbeat_sensor, args=(self.heartbeat_interval, ))
-        heartbeat_loop.start()
+        self.heartbeat_loop = Process(target=self.heartbeat_sensor, args=(self.heartbeat_interval, ))
+        self.heartbeat_loop.start()
+
+    def stop(self):
+        # Graceful shutdown
+        self.continue_run = False
+        self.heartbeat_loop.join()
+        self.scheduler_loop.join()
 
     def do_schedule_once(self, interval):
         self.connect_db()   # Connect to database before fork
@@ -70,7 +82,7 @@ class Scheduler:
                     slave = None
 
                 if slave:
-                    logging.info("Assigning task " + task.taskname + "to slave " + slave.hash)
+                    logging.info("Assigning task " + task.taskname + " to slave " + slave.hash)
                     # Dispatch job to slave
                     # Use threads here to share mongoengine connector and process request asynchronously
                     _thread.start_new_thread(self.send_task, (task, slave, ))
@@ -96,7 +108,6 @@ class Scheduler:
         logging.info("Scheduler shutdown requested; shutting down heartbeat sensor now...")
 
     def ping_slave_hb(self, slave):
-
         try:
             logging.debug("Making heartbeat request to slave " + slave.hash)
             req = requests.get(slave.url)
@@ -122,7 +133,7 @@ class Scheduler:
                                                         self.handle_hb_timeout, args=(slave,))
                 self.hb_timers[slave.hash].start()
         else:
-            logging.warning("Slave " + slave.hash + "returned incorrect response code; removing from database...")
+            logging.warning("Slave " + slave.hash + " returned incorrect response code; removing from database...")
             # slave.delete() DEBUG
 
     @staticmethod
@@ -137,7 +148,7 @@ class Scheduler:
         except Exception as e:
             # Slave did not respond correctly, do not change task status
             logging.warning("POST to slave " + slave.hash + " failed:\n" + str(e))
-            slave.delete() # Remove the unhealthy slave
+            # slave.delete() DEBUG # Remove the unhealthy slave
 
     @staticmethod
     def assign_cb(req, task, slave):
@@ -146,5 +157,6 @@ class Scheduler:
             task.update(host=slave.url, state="running")
             slave.update(state="RUNNING")
             logging.info("Task registered with slave " + slave.hash)
-
-
+        else:
+            logging.warning("Slave " + slave.hash + " returned incorrect response code; removing from database...")
+            # slave.delete() DEBUG

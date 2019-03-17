@@ -6,7 +6,6 @@ from app.start import application
 
 gunicorn.SERVER_SOFTWARE = 'gunicorn'  # hide gunicorn version
 
-
 class Application(gunicorn.app.base.BaseApplication):
     def __init__(self, app, options=None):
         self.options = options or {}
@@ -26,12 +25,14 @@ class Application(gunicorn.app.base.BaseApplication):
 class Server:
     @staticmethod
     def post_fork(server, worker):
-        MongoStorage()
+        scheduler.start()
 
     def start(self):
         logging.info("Starting API server")
         opts = {
-            "post_fork": self.post_fork,
+            # "post_fork": self.post_fork,
         }
         Application(application, opts).run()
+
+
 
