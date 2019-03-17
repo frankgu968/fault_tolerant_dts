@@ -1,13 +1,12 @@
 import os
 import logging
 from time import sleep
-from multiprocessing import Process
 from utils.MongoStorage import MongoStorage
 from models import Slave, Task
 from mongoengine import Q, DoesNotExist
 import requests
 from requests.exceptions import ConnectionError, ConnectTimeout
-import _thread
+from threading import Thread
 from utils.ResettableTimer import TimerReset
 
 # TODO: Change this to use environment
@@ -52,12 +51,13 @@ class Scheduler:
 
     def start(self):
         self.continue_run = True
+        self.connect_db()
         logging.info("Starting scheduler loop, interval="+str(self.schedule_interval)+"s")
-        self.scheduler_loop = Process(target=self.do_schedule_once, args=(self.schedule_interval, ))
+        self.scheduler_loop = Thread(target=self.do_schedule_once, args=(self.schedule_interval, ))
         self.scheduler_loop.start()
 
         logging.info("Starting heartbeat sensor, interval="+str(self.heartbeat_interval)+"s")
-        self.heartbeat_loop = Process(target=self.heartbeat_sensor, args=(self.heartbeat_interval, ))
+        self.heartbeat_loop = Thread(target=self.heartbeat_sensor, args=(self.heartbeat_interval, ))
         self.heartbeat_loop.start()
 
     def stop(self):
@@ -67,8 +67,6 @@ class Scheduler:
         self.scheduler_loop.join()
 
     def do_schedule_once(self, interval):
-        self.connect_db()   # Connect to database before fork
-
         while self.continue_run:
             task = Task.objects(Q(state="created") | Q(state="killed"))
 
@@ -85,7 +83,7 @@ class Scheduler:
                     logging.info("Assigning task " + task.taskname + " to slave " + slave.hash)
                     # Dispatch job to slave
                     # Use threads here to share mongoengine connector and process request asynchronously
-                    _thread.start_new_thread(self.send_task, (task, slave, ))
+                    Thread(target=self.send_task, args=(task, slave, )).start()
             else:
                 logging.info("All tasks completed!")
             sleep(interval)
@@ -93,16 +91,14 @@ class Scheduler:
         logging.info("Scheduler shutdown requested; shutting down scheduler now...")
 
     def heartbeat_sensor(self, interval):
-        self.connect_db()   # Seperate connection entity as the scheduler
-
         while self.continue_run:
             try:
                 slaves = Slave.objects()
                 for slave in slaves:
                     # make async request for heartbeat on another thread
-                    _thread.start_new_thread(self.ping_slave_hb, (slave,))
+                    Thread(target=self.ping_slave_hb, args=(slave,)).start()
             except Exception as e:
-                logging.error(e)
+                logging.error("Threading exception in heartbeat sensor" + str(e))
             sleep(interval)
 
         logging.info("Scheduler shutdown requested; shutting down heartbeat sensor now...")

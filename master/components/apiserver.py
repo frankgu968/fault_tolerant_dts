@@ -25,7 +25,7 @@ class Application(gunicorn.app.base.BaseApplication):
 class Server:
     @staticmethod
     def post_fork(server, worker):
-        MongoStorage(conn_alias="gunicorn") # For the Gunicorn application
+        MongoStorage() # For the Gunicorn application
 
     @staticmethod
     def start():
