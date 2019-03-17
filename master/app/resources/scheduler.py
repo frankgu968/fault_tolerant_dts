@@ -1,11 +1,12 @@
 import json
 import logging
 import falcon
+import os
 from components.scheduler import Scheduler
 
 logging.basicConfig(
         format='%(asctime)s %(levelname)-8s %(message)s',
-        level=logging.DEBUG,
+        level=os.getenv("LOG_LEVEL", default=logging.DEBUG),
         datefmt='%Y-%m-%d %H:%M:%S')
 
 

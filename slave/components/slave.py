@@ -7,6 +7,8 @@ from utils.ResettableTimer import TimerReset
 from time import sleep
 import subprocess
 import threading
+
+
 def check_positive_integer(test_str, purpose=""):
     if test_str.isdigit() and int(test_str) > 0:
         return int(test_str)
@@ -54,8 +56,10 @@ class Slave(object):
 
                     if not first_loop:
                         # Since previous timer expired, create new timer object
-                        self.hb_timer.reset()
-                        self.hb_timer.run()
+                        self.hb_timer.cancel()
+                        self.hb_timer = TimerReset(self.master_timeout, self.master_timeout_handler)
+                        self.hb_timer.start()
+                        # self.hb_timer.run()
                     else:
                         self.hb_timer.start()  # Start the master timeout
 
@@ -96,6 +100,7 @@ class Slave(object):
 
     def done_transition(self, returncode):
         if returncode == 0:
+            self.state = "DONE"
             logging.info("Slave has completed task " + self.task["taskname"])
             try:
                 req_dict = {
@@ -107,10 +112,9 @@ class Slave(object):
                     self.state = "READY"
                     self.task = []
                     self.runner = []
-                else:
-                    self.state = "DONE"
             except Exception as e:
                 logging.error(e)
+
         else:
             logging.error("Task execution returned " + str(returncode))
             self.reset()

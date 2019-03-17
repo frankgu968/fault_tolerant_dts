@@ -10,3 +10,13 @@ services:
       - "--bind"
       - "0.0.0.0:8000"
       - "app.start"
+
+  slave-1:
+    volumes:
+      - ./slave:/src
+    command:
+      - "/usr/local/bin/gunicorn"
+      - "--reload"
+      - "--bind"
+      - "0.0.0.0:8888"
+      - "app.start"

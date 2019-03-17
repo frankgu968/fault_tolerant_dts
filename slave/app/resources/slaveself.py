@@ -2,10 +2,11 @@ import json
 import logging
 import falcon
 from components.slave import Slave
+import os
 
 logging.basicConfig(
         format='%(asctime)s %(levelname)-8s %(message)s',
-        level=logging.DEBUG,
+        level=os.getenv("LOG_LEVEL", default=logging.DEBUG),
         datefmt='%Y-%m-%d %H:%M:%S')
 
 
@@ -23,6 +24,8 @@ class SlaveSelfResource(object):
             "state": self.slave.state,
             "task": self.slave.task
         })
+
+        logging.debug(ret_str)
 
         # Transition handler for DONE state after master recovery
         if self.slave.state == "DONE":

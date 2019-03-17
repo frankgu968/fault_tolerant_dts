@@ -11,9 +11,8 @@ services:
     ports:
       - 27017:27017
 
-  master:
-    image: scheduler-master-image
-    restart: always
+  seeder:
+    image: seeder-image
     environment:
       DB_NAME: scheduler_db
       TASK_COL_NAME: task
@@ -21,7 +20,31 @@ services:
       MONGO_PORT: 27017
       MONGO_USER: root
       MONGO_PASSWORD: example
+    depends_on:
+      - mongo
+
+  master:
+    image: scheduler-master-image
+    restart: always
+    environment:
+      DB_NAME: scheduler_db
+      TASK_COL_NAME: task
+      MONGO_HOST: mongo
+      MONGO_PORT: 27017
+      MONGO_USER: root
+      MONGO_PASSWORD: example
     ports:
       - 8000:8000
-    volumes:
-      - ./master:/src
+    depends_on:
+      - mongo
+
+  slave-1:
+    image: scheduler-slave-image
+    restart: always
+    environment:
+      MASTER_TIMEOUT: 5
+      SLAVE_PORT: 8888
+      MASTER_HOST: master
+      MASTER_PORT: 8000
+    depends_on:
+      - master

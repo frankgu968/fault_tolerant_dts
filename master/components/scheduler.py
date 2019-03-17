@@ -10,9 +10,6 @@ from requests.exceptions import ConnectionError, ConnectTimeout
 from threading import Thread
 from utils.ResettableTimer import TimerReset
 
-# TODO: Change this to use environment
-HB_GRACE_PERIOD = 2.0
-
 
 def check_positive_integer(test_str, purpose=""):
     if test_str.isdigit() and int(test_str) > 0:
@@ -36,7 +33,7 @@ class Scheduler:
         self.slave_col_name = os.getenv("SLAVE_COL_NAME", default="slave")
         self.schedule_interval = check_positive_integer(os.getenv("SCHEDULE_INTERVAL", default="5"), purpose="schedule interval")
         self.heartbeat_interval = check_positive_integer(os.getenv("HEARTBEAT_INTERVAL", default="3"), purpose="heartbeat interval")
-
+        self.heartbeat_grace_period = check_positive_integer(os.getenv("HEARTBEAT_GRACE_PERIOD", default="2"), purpose="heartbeat grace periods")
         self.start()
 
     def connect_db(self):
@@ -44,7 +41,7 @@ class Scheduler:
 
         if self.slave_col_name not in self.db.list_collection_names():
             logging.info("No metadata collection found, creating new collection")
-            self.db.create_collection(self.slave_col_name())
+            self.db.create_collection(self.slave_col_name)
         else:
             logging.info("Previous session metadata found, restoring master")
 
@@ -132,7 +129,7 @@ class Scheduler:
                 self.hb_timers[slave.hash].reset()
             else:
                 logging.info("Starting new heartbeat timer for slave " + slave.hash)
-                self.hb_timers[slave.hash] = TimerReset(self.heartbeat_interval + HB_GRACE_PERIOD,
+                self.hb_timers[slave.hash] = TimerReset(self.heartbeat_interval + self.heartbeat_grace_period,
                                                         self.handle_hb_timeout, args=(slave,))
                 self.hb_timers[slave.hash].start()
         else:
