@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  master:
+    volumes:
+      - ./master:/src
+    command:
+      - "/usr/local/bin/gunicorn"
+      - "--reload"
+      - "--bind"
+      - "0.0.0.0:8000"
+      - "app.start"
