@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 class MongoStorage():
     def __init__(self):
-        self.db_name = os.getenv("MONGO_USER", default="scheduler_db")
+        self.db_name = os.getenv("DB_NAME", default="scheduler_db")
         self.task_col = os.getenv("TASK_COL_NAME", default="task")
         self.slave_col = os.getenv("SLAVE_COL_NAME", default="slave")
         self.db_uri = "mongodb://" + \
