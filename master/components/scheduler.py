@@ -2,13 +2,13 @@ import os
 import logging
 from time import sleep
 from multiprocessing import Process
-from MongoStorage import MongoStorage
+from utils.MongoStorage import MongoStorage
 from models import Slave, Task
 from mongoengine import Q, DoesNotExist
 import requests
 from requests.exceptions import ConnectionError, ConnectTimeout
 import _thread
-from ResettableTimer import TimerReset
+from utils.ResettableTimer import TimerReset
 
 # TODO: Change this to use environment
 HB_GRACE_PERIOD = 2.0

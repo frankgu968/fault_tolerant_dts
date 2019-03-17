@@ -1,7 +1,7 @@
 import json
 import logging
 import falcon
-from scheduler import Scheduler
+from components.scheduler import Scheduler
 
 
 class SchedulerResource(object):
