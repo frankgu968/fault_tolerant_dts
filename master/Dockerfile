@@ -7,6 +7,9 @@ LABEL description="scheduler-master container"
 RUN apk add --no-cache tini
 # Tini is now available at /sbin/tini
 
+# Install Cython for Falcon
+RUN apk add --no-cache cython
+
 COPY requirements.txt /src/requirements.txt
 RUN ["pip", "install", "-r", "/src/requirements.txt"]
 

@@ -13,6 +13,14 @@ from utils.ResettableTimer import TimerReset
 HB_GRACE_PERIOD = 2.0
 
 
+def check_positive_integer(test_str, purpose=""):
+    if test_str.isdigit() and int(test_str) > 0:
+        return int(test_str)
+    else:
+        logging.error("Invalid " + purpose + " , must be (0,N] in seconds")
+        exit(1)
+
+
 class Scheduler:
     def __init__(self):
         self.db = []
@@ -25,20 +33,8 @@ class Scheduler:
 
         # Initialize database connection and collection
         self.slave_col_name = os.getenv("SLAVE_COL_NAME", default="slave")
-
-        self.schedule_interval = os.getenv("SCHEDULE_INTERVAL", default="5")
-        if self.schedule_interval.isdigit() and int(self.schedule_interval) > 0:
-            self.schedule_interval = int(self.schedule_interval)
-        else:
-            logging.error("Invalid schedule interval, must be (0,N] in seconds")
-            exit(1)
-
-        self.heartbeat_interval = os.getenv("HEARTBEAT_INTERVAL", default="3")
-        if self.heartbeat_interval.isdigit() and int(self.heartbeat_interval) > 0:
-            self.heartbeat_interval = int(self.heartbeat_interval)
-        else:
-            logging.error("Invalid heartbeat interval, must be (0,N] in seconds")
-            exit(1)
+        self.schedule_interval = check_positive_integer(os.getenv("SCHEDULE_INTERVAL", default="5"), purpose="schedule interval")
+        self.heartbeat_interval = check_positive_integer(os.getenv("HEARTBEAT_INTERVAL", default="3"), purpose="heartbeat interval")
 
     def connect_db(self):
         self.db = MongoStorage().get_db()
@@ -98,7 +94,6 @@ class Scheduler:
                     # make async request for heartbeat on another thread
                     Thread(target=self.ping_slave_hb, args=(slave,)).start()
             except Exception as e:
-                logging.error("HERE")
                 logging.error("Threading exception in heartbeat sensor" + str(e))
             sleep(interval)
 
