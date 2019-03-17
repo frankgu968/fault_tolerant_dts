@@ -23,10 +23,16 @@ class Application(gunicorn.app.base.BaseApplication):
 
 
 class Server:
+    @staticmethod
+    def post_fork(server, worker):
+        MongoStorage() # For the Gunicorn application
 
-    def start(self):
+    @staticmethod
+    def start():
         logging.info("Starting API server")
-        opts = {}
+        opts = {
+            "post_fork": Server.post_fork,
+        }
         Application(application, opts).run()
 
 

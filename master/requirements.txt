@@ -4,4 +4,4 @@ gunicorn==19.9.*
 mongoengine==0.17.*
 cython
 blinker==1.4
-request
+requests

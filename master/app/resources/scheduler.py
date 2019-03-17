@@ -1,9 +1,13 @@
 import json
 import logging
 import falcon
-from SchedulerSingleton import SchedulerSingleton
+from scheduler import Scheduler
 
-class SchedulerResource(SchedulerSingleton):
+
+class SchedulerResource(object):
+    def __init__(self):
+        self.scheduler = Scheduler()
+
     def on_post(self, req, resp, action):
         if action == "start":
             if self.scheduler.continue_run:

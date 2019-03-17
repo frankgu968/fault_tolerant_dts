@@ -4,6 +4,7 @@ Referenced from http://code.activestate.com/recipes/577407-resettable-timer-clas
 
 from threading import Thread, Event
 
+
 def TimerReset(*args, **kwargs):
     """ Global function for Timer """
     return _TimerReset(*args, **kwargs)

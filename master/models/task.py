@@ -3,7 +3,6 @@ from mongoengine.fields import StringField
 
 
 class Task(Document):
-
     taskname = StringField(required=True)
     sleeptime = StringField(required=True)
     state = StringField(required=True)
