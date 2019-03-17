@@ -23,7 +23,7 @@ class Slave(object):
         self.runner = []
         self.task = []
         self.run_checker = []
-        self.master_timeout = check_positive_integer(os.getenv("MASTER_TIMEOUT", default="10"), purpose="master timeout")
+        self.master_timeout = check_positive_integer(os.getenv("MASTER_TIMEOUT", default="5"), purpose="master timeout")
         self.hb_timer = TimerReset(self.master_timeout, self.master_timeout_handler)
         self.hostname = socket.gethostname()
         self.port = check_positive_integer(os.getenv("SLAVE_PORT", default="8888"), purpose="slave port")
@@ -58,11 +58,13 @@ class Slave(object):
 
                 if not first_loop:
                     # Since previous timer expired, create new timer object
-                    self.hb_timer.cancel()
+                    self.hb_timer.reset()
+                    self.hb_timer.run()
+                else:
                     # TODO: Fix timer
-                    self.hb_timer = TimerReset(self.master_timeout, self.master_timeout_handler)
+                    # self.hb_timer = TimerReset(self.master_timeout, self.master_timeout_handler)
 
-                self.hb_timer.start() # Start the master timeout
+                    self.hb_timer.start() # Start the master timeout
 
                 logging.info("Slave successfully registered with master; started master timeout=" + \
                              str(self.master_timeout) + "s")
@@ -102,10 +104,7 @@ class Slave(object):
         self.runner = []
 
     def refresh_master_timeout(self):
+        # self.hb_timer.cancel()
         self.hb_timer.reset(interval=self.master_timeout)
+        # self.hb_timer.run()
 
-    def get_state(self):
-        return self.state
-
-    def set_state(self, new_state):
-        self.state = new_state

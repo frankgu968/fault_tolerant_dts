@@ -37,6 +37,8 @@ class Scheduler:
         self.schedule_interval = check_positive_integer(os.getenv("SCHEDULE_INTERVAL", default="5"), purpose="schedule interval")
         self.heartbeat_interval = check_positive_integer(os.getenv("HEARTBEAT_INTERVAL", default="3"), purpose="heartbeat interval")
 
+        self.start()
+
     def connect_db(self):
         self.db = MongoStorage().get_db()
 
@@ -82,7 +84,7 @@ class Scheduler:
                     # Use threads here to share mongoengine connector and process request asynchronously
                     Thread(target=self.send_task, args=(task, slave, )).start()
             else:
-                logging.info("All tasks completed!")
+                logging.info("No tasks to be scheduled...")
             sleep(interval)
 
         logging.info("Scheduler shutdown requested; shutting down scheduler now...")

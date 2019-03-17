@@ -35,7 +35,6 @@ class SlaveSelfResource(object):
 
     def on_post(self, req, resp):
         # New job handler
-
         task = json.load(req.stream)
         logging.debug("Slave received new task: " + str(task))
         self.slave.refresh_master_timeout()

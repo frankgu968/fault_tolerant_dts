@@ -45,7 +45,7 @@ class _TimerReset(Thread):
 
         if interval:
             self.interval = interval
-        else:
-            self.resetted = True
-            self.finished.set()
-            self.finished.clear()
+
+        self.resetted = True
+        self.finished.set()
+        self.finished.clear()

@@ -4,13 +4,13 @@ Referenced from http://code.activestate.com/recipes/577407-resettable-timer-clas
 
 from threading import Thread, Event
 
+#
+# def TimerReset(*args, **kwargs):
+#     """ Global function for Timer """
+#     return _TimerReset(*args, **kwargs)
+#
 
-def TimerReset(*args, **kwargs):
-    """ Global function for Timer """
-    return _TimerReset(*args, **kwargs)
-
-
-class _TimerReset(Thread):
+class TimerReset(Thread):
     """Call a function after a specified number of seconds:
 
     t = TimerReset(30.0, f, args=[], kwargs={})
@@ -45,7 +45,7 @@ class _TimerReset(Thread):
 
         if interval:
             self.interval = interval
-        else:
-            self.resetted = True
-            self.finished.set()
-            self.finished.clear()
+
+        self.resetted = True
+        self.finished.set()
+        self.finished.clear()

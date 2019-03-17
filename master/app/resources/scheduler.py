@@ -24,6 +24,7 @@ class SchedulerResource(object):
         elif action == "stop":
             if self.scheduler.continue_run:
                 self.scheduler.stop()
+                logging.info("scheduler has stopped!")
                 resp.body = json.dumps({"message": "Scheduler has stopped."})
             else:
                 resp.body = json.dumps({"error": "Scheduler is was not running!"})
