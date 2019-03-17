@@ -48,3 +48,25 @@ services:
       MASTER_PORT: 8000
     depends_on:
       - master
+
+  slave-2:
+    image: scheduler-slave-image
+    restart: always
+    environment:
+      MASTER_TIMEOUT: 5
+      SLAVE_PORT: 8888
+      MASTER_HOST: master
+      MASTER_PORT: 8000
+    depends_on:
+      - master
+
+  slave-3:
+    image: scheduler-slave-image
+    restart: always
+    environment:
+      MASTER_TIMEOUT: 5
+      SLAVE_PORT: 8888
+      MASTER_HOST: master
+      MASTER_PORT: 8000
+    depends_on:
+      - master

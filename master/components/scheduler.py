@@ -68,17 +68,15 @@ class Scheduler:
         if task:
             task = task[0]
             logging.info("Found pending task: " + task.taskname)
-            try:
-                slave = Slave.objects.get(state="READY")
-            except DoesNotExist:
-                logging.info("No available slaves found, waiting for next loop...")
-                slave = None
-
+            slave = Slave.objects(state="READY")
             if slave:
+                slave = slave[0]
                 logging.info("Assigning task " + task.taskname + " to slave " + slave.hash)
                 # Dispatch job to slave
                 # Use threads here to share mongoengine connector and process request asynchronously
                 Thread(target=self.send_task, args=(task, slave,)).start()
+            else:
+                logging.info("No available slaves found, waiting for next loop...")
         else:
             logging.info("No tasks to be scheduled...")
 
