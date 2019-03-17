@@ -10,3 +10,18 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     ports:
       - 27017:27017
+
+  master:
+    image: scheduler-master-image
+    restart: always
+    environment:
+      DB_NAME: scheduler_db
+      TASK_COL_NAME: task
+      MONGO_HOST: fault_tolerant_dts_mongo_1
+      MONGO_PORT: 27017
+      MONGO_USER: root
+      MONGO_PASSWORD: example
+    ports:
+      - 8000:8000
+    volumes:
+      - ./master:/src

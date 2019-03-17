@@ -19,4 +19,4 @@ EXPOSE 8000
 ENV PYTHONPATH /src
 
 ENTRYPOINT ["/sbin/tini", "-s", "--"]
-CMD ["/usr/local/bin/gunicorn", "--bind", "0.0.0.0:8000", "app.start"]
+CMD ["/usr/local/bin/gunicorn", "--reload", "--bind", "0.0.0.0:8000", "app.start"]
