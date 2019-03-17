@@ -16,8 +16,6 @@ class SlaveSelfResource(object):
     def on_get(self, req, resp):
         # Heartbeat response and state transition handler
         logging.info("Received heartbeat message from master")
-        if (self.slave.state == "RUNNING") and (self.slave.runner.poll()) is not None:
-            self.slave.state = "DONE"
 
         ret_str = json.dumps({
             "hash": self.slave.hash,
@@ -26,10 +24,12 @@ class SlaveSelfResource(object):
             "task": self.slave.task
         })
 
-        # Transition handler for DONE state
+        # Transition handler for DONE state after master recovery
         if self.slave.state == "DONE":
             logging.info("Slave transitioning from DONE to READY")
-            self.slave.done_transition()
+            self.slave.state = "READY"
+            self.slave.task = []
+            self.slave.runner = []
         self.slave.refresh_master_timeout()
         resp.body = json.dumps(ret_str)
 
@@ -44,5 +44,6 @@ class SlaveSelfResource(object):
             resp.status = falcon.HTTP_OK
         else:
             logging.info("Slave could not start running new task " + task["taskname"])
+            self.slave.reset()
             resp.status = falcon.HTTP_INTERNAL_SERVER_ERROR
 

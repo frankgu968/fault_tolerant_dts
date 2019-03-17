@@ -17,7 +17,7 @@ class SchedulerResource(object):
         if action == "start":
             if self.scheduler.continue_run:
                 resp.body = json.dumps({"error": "Scheduler is already running!"})
-                resp.status = falcon.HTTP_400
+                resp.status = falcon.HTTP_INTERNAL_SERVER_ERROR
             else:
                 self.scheduler.start()
                 resp.body = json.dumps({"message": "Scheduler has started..."})
@@ -27,6 +27,19 @@ class SchedulerResource(object):
                 logging.info("scheduler has stopped!")
                 resp.body = json.dumps({"message": "Scheduler has stopped."})
             else:
-                resp.body = json.dumps({"error": "Scheduler is was not running!"})
-                resp.status = falcon.HTTP_400
+                resp.body = json.dumps({"error": "Scheduler was not running!"})
+                resp.status = falcon.HTTP_INTERNAL_SERVER_ERROR
+        elif action == "task_done":
+            if self.scheduler.continue_run:
+                raw_json = req.stream.read()
+                body = json.loads(raw_json, encoding='utf-8')
+                task_name = body["task_name"]
+                slave_hash = body["slave_hash"]
+                self.scheduler.handle_task_complete(task_name, slave_hash)
+                self.scheduler.do_schedule_once()
+                resp.status = falcon.HTTP_OK
+            else:
+                logging.warning("Slave posted task complete when master scheduler was not running")
+                resp.body = json.dumps({"error": "Master scheduler was not running!"})
+                resp.status = falcon.HTTP_INTERNAL_SERVER_ERROR
 

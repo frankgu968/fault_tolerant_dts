@@ -52,7 +52,7 @@ class Scheduler:
         self.continue_run = True
         self.connect_db()
         logging.info("Starting scheduler loop, interval="+str(self.schedule_interval)+"s")
-        self.scheduler_loop = Thread(target=self.do_schedule_once, args=(self.schedule_interval, ))
+        self.scheduler_loop = Thread(target=self.run_scheduler_loop, args=(self.schedule_interval, ))
         self.scheduler_loop.start()
 
         logging.info("Starting heartbeat sensor, interval="+str(self.heartbeat_interval)+"s")
@@ -65,26 +65,29 @@ class Scheduler:
         self.heartbeat_loop.join()
         self.scheduler_loop.join()
 
-    def do_schedule_once(self, interval):
+    def do_schedule_once(self):
+        task = Task.objects(Q(state="created") | Q(state="killed"))
+
+        if task:
+            task = task[0]
+            logging.info("Found pending task: " + task.taskname)
+            try:
+                slave = Slave.objects.get(state="READY")
+            except DoesNotExist:
+                logging.info("No available slaves found, waiting for next loop...")
+                slave = None
+
+            if slave:
+                logging.info("Assigning task " + task.taskname + " to slave " + slave.hash)
+                # Dispatch job to slave
+                # Use threads here to share mongoengine connector and process request asynchronously
+                Thread(target=self.send_task, args=(task, slave,)).start()
+        else:
+            logging.info("No tasks to be scheduled...")
+
+    def run_scheduler_loop(self, interval):
         while self.continue_run:
-            task = Task.objects(Q(state="created") | Q(state="killed"))
-
-            if task:
-                task = task[0]
-                logging.info("Found pending task: " + task.taskname)
-                try:
-                    slave = Slave.objects.get(state="READY")
-                except DoesNotExist:
-                    logging.info("No available slaves found, waiting for next loop...")
-                    slave = None
-
-                if slave:
-                    logging.info("Assigning task " + task.taskname + " to slave " + slave.hash)
-                    # Dispatch job to slave
-                    # Use threads here to share mongoengine connector and process request asynchronously
-                    Thread(target=self.send_task, args=(task, slave, )).start()
-            else:
-                logging.info("No tasks to be scheduled...")
+            self.do_schedule_once()
             sleep(interval)
 
         logging.info("Scheduler shutdown requested; shutting down scheduler now...")
@@ -117,10 +120,8 @@ class Scheduler:
             slave_reply = json.loads(req.json())
             # On this hb request, slave side would have already set state -> READY
             if slave_reply["state"] == "DONE":
-                logging.info("Slave " + slave.hash + " completed task " + slave_reply["task"]["taskname"])
-                slave.update(hash=slave_reply["hash"], url=slave_reply["url"], state="READY")
-                done_task = Task.objects.get(taskname=slave_reply["task"]["taskname"])
-                done_task.update(state="success", host=slave_reply["hash"])
+                # Master offline recovery
+                self.handle_task_complete(slave_reply["task"]["taskname"], slave_reply["hash"])
             else:
                 slave.update(hash=slave_reply["hash"], url=slave_reply["url"], state=slave_reply["state"])
 
@@ -152,7 +153,7 @@ class Scheduler:
             if slave_tasks:
                 for task_to_kill in slave_tasks:
                     logging.debug("Setting slave " + slave.hash + " task " + task_to_kill.taskname + "to state=killed")
-                    task_to_kill.update(state="killed", host="")
+                    task_to_kill.update(state="killed")
             slave.delete()
         else:
             logging.debug("Ignoring delete request for slave " + slave.hash + " since the scheduler has stopped")
@@ -176,3 +177,11 @@ class Scheduler:
         else:
             logging.warning("Slave " + slave.hash + " returned incorrect response code")
             self.remove_slave(slave)
+
+    @staticmethod
+    def handle_task_complete(task_name, slave_hash):
+        logging.info("Slave " + slave_hash + " completed task " + task_name)
+        slave = Slave.objects.get(hash=slave_hash)
+        slave.update(hash=slave_hash, state="READY")
+        task = Task.objects.get(taskname=task_name)
+        task.update(state="success", host=slave_hash)
