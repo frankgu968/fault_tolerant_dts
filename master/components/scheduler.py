@@ -5,6 +5,7 @@ from utils.MongoStorage import MongoStorage
 from models import Slave, Task
 from mongoengine import Q, DoesNotExist
 import requests
+import json
 from requests.exceptions import ConnectionError, ConnectTimeout
 from threading import Thread
 from utils.ResettableTimer import TimerReset
@@ -107,13 +108,19 @@ class Scheduler:
         except (ConnectionError, ConnectTimeout) as e:
             # Slave failed heartbeat
             logging.warning("POST to slave " + slave.hash + " failed:\n" + str(e))
-            # slave.delete() DEBUG  # Remove the faulty slave
+            self.remove_slave(slave)
 
     def slave_hb_callback(self, req, slave):
         if req.status_code == requests.codes.ok:
-            # TODO: when real slave comes in!
-            # slave_reply = req.json() DEBUG
-            # slave.update(host=slave_reply["url"], state=slave_reply["state"]) DEBUG
+            slave_reply = json.loads(req.json())
+            # On this hb request, slave side would have already set state -> READY
+            if slave_reply["state"] == "DONE":
+                slave.update(hash=slave_reply["hash"], url=slave_reply["url"], state="READY")
+                done_task = Task.objects.get(taskname=slave_reply["task"]["taskname"])
+                done_task.update(state="success", host=slave_reply["hash"])
+            else:
+                slave.update(hash=slave_reply["hash"], url=slave_reply["url"], state=slave_reply["state"])
+
             logging.debug(slave.hash + " replied!")
             # Slave is alive, refresh slave's timer
             if slave.hash in self.hb_timers:
@@ -125,13 +132,24 @@ class Scheduler:
                                                         self.handle_hb_timeout, args=(slave,))
                 self.hb_timers[slave.hash].start()
         else:
-            logging.warning("Slave " + slave.hash + " returned incorrect response code; removing from database...")
-            # slave.delete() DEBUG
+            logging.warning("Slave " + slave.hash + " returned incorrect response code")
+            self.remove_slave(slave)
+
+    def handle_hb_timeout(self, slave):
+        # Slave can be reached, but does not respond correctly
+        logging.warning("Slave " + slave.hash + " has timed out")
+        self.remove_slave(slave)
 
     @staticmethod
-    def handle_hb_timeout(slave):
-        # Slave can be reached, but does not respond correctly
-        logging.warning("Slave " + slave.hash + " has timed out; removing from database...")
+    def remove_slave(slave):
+        # Universal method for removing slave and setting its task(s) to "killed state"
+        logging.debug("Removing slave " + slave.hash + " from database")
+        slave_tasks = Task.objects(host=slave.hash, state="running")
+        if slave_tasks:
+            for task_to_kill in slave_tasks:
+                logging.debug("Setting slave " + slave.hash + " task " + task_to_kill.taskname + "to state=killed")
+                task_to_kill.update(state="killed", host="")
+        slave.delete()
 
     def send_task(self, task, slave):
         try:
@@ -140,15 +158,14 @@ class Scheduler:
         except Exception as e:
             # Slave did not respond correctly, do not change task status
             logging.warning("POST to slave " + slave.hash + " failed:\n" + str(e))
-            # slave.delete() DEBUG # Remove the unhealthy slave
+            self.remove_slave(slave)
 
-    @staticmethod
-    def assign_cb(req, task, slave):
+    def assign_cb(self, req, task, slave):
         # Callback to update database with task assignment
         if req.status_code == requests.codes.ok:
-            task.update(host=slave.url, state="running")
+            task.update(host=slave.hash, state="running")
             slave.update(state="RUNNING")
             logging.info("Task registered with slave " + slave.hash)
         else:
-            logging.warning("Slave " + slave.hash + " returned incorrect response code; removing from database...")
-            # slave.delete() DEBUG
+            logging.warning("Slave " + slave.hash + " returned incorrect response code")
+            self.remove_slave(slave)

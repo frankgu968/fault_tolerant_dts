@@ -25,9 +25,9 @@ class Application(gunicorn.app.base.BaseApplication):
 class Server:
     @staticmethod
     def start():
-        logging.info("Starting API server")
+        logging.info("Starting slave API server")
         opts = {
-            "bind": ["0.0.0.0:8000"]
+            "bind": ["0.0.0.0:8888"]
         }
         Application(application, opts).run()
 

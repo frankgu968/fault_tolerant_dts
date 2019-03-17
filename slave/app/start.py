@@ -8,5 +8,5 @@ api.req_options.auto_parse_form_urlencoded = True
 
 
 slave_self = SlaveSelfResource()
-api.add_route('/', slave_resource)
+api.add_route('/', slave_self)
 

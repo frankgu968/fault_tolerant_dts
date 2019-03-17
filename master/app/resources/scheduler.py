@@ -8,6 +8,7 @@ logging.basicConfig(
         level=logging.DEBUG,
         datefmt='%Y-%m-%d %H:%M:%S')
 
+
 class SchedulerResource(object):
     def __init__(self):
         self.scheduler = Scheduler()
