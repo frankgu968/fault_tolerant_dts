@@ -23,15 +23,10 @@ class Application(gunicorn.app.base.BaseApplication):
 
 
 class Server:
-    @staticmethod
-    def post_fork(server, worker):
-        scheduler.start()
 
     def start(self):
         logging.info("Starting API server")
-        opts = {
-            # "post_fork": self.post_fork,
-        }
+        opts = {}
         Application(application, opts).run()
 
 
