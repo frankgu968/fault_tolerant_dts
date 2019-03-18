@@ -32,4 +32,4 @@ Slave-2 - Slave with hash b2626a253379f3d85ffe4913e4a4c2f95511331d
 |23:58:38|INFO|Slave-2 reregisters with the master sends first heartbeat response with state `DONE`. Slave-2 transitions back to `READY` state. Master acknowledges the `DONE` state but since Slave-2 is attempting reregistration, master creates a new slave record with state `READY` in the database|
 |23:58:46|INFO|Slave-1 completes task83 and notifies master; master updates database|
 
-Since I am nearly out of time, an untested attempt at fixing the problem will be implemented on the `handle-rogue-slave` branch.
+Since I am nearly out of time, an untested attempt at fixing the problem will be implemented on the `handle-rogue-slave` branch. The above logs are generated from code in release tag `v1.0-rc1`.
