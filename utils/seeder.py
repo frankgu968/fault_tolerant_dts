@@ -41,7 +41,7 @@ def seed_db():
 def seed_task(index, collection):
     new_task = {
         "taskname": "task" + str(index),
-        "sleeptime": randint(1, 30),
+        "sleeptime": randint(1, 20),
         "state": "created"
     }
     collection.insert_one(new_task)

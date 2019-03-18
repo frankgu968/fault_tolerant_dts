@@ -12,6 +12,8 @@ The slaves register with the master and executes the task assigned by the master
 3. **Metadata Store**
 The metadata store is implemented as two collections in a mongodb instance. The `task` collection contains documents that represent individual tasks in any state. The `slaves` collection contains documents used by the master to keep track of the slave states.
 
+See the `validation` directory for run results. 
+
 #### Requirements
 - The metadata store shall be *mongodb*
 - Master and slave(s) shall be written in Python and run in a containerized environment
@@ -125,7 +127,7 @@ On master task assignment POST, the API server will spool a thread, which forks 
 ## Usage
 To run the stack, simply run `run.sh` in the source directory :)
 
-This script will create the mongodb, 1 master and 3 slaves, and seed the mongodb with 100 tasks with random sleeptimes between 1 and 60 seconds.  
+This script will create the mongodb, 1 master and 3 slaves, and seed the mongodb with 100 tasks with random sleeptimes between 1 and 20 seconds.  
 The master's API server is exposed on `http://localhost:8000`.  
 The scheduler is started by default, but you can start/stop the scheduler manually by making a HTTP POST to `http://localhost:8000/scheduler/[start | stop]`
 

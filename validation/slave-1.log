@@ -1,0 +1,580 @@
+[2019-03-17 23:51:54 +0000] [9] [INFO] Starting gunicorn 19.9.0
+[2019-03-17 23:51:54 +0000] [9] [INFO] Listening at: http://0.0.0.0:8888 (9)
+[2019-03-17 23:51:54 +0000] [9] [INFO] Using worker: sync
+[2019-03-17 23:51:54 +0000] [11] [INFO] Booting worker with pid: 11
+2019-03-17 23:51:54 INFO     Attempting to register with master
+2019-03-17 23:51:54 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:51:55 DEBUG    http://master:8000 "POST /slave HTTP/1.1" 200 106
+2019-03-17 23:51:55 INFO     Slave successfully registered with master; started master timeout=5s
+2019-03-17 23:52:00 INFO     Master timed out!
+2019-03-17 23:52:00 INFO     Attempting to register with master
+2019-03-17 23:52:00 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:52:00 INFO     Received heartbeat message from master
+2019-03-17 23:52:00 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:52:00 DEBUG    http://master:8000 "POST /slave HTTP/1.1" 200 106
+2019-03-17 23:52:00 DEBUG    Slave received new task: {'taskname': 'task0', 'sleeptime': '18', 'state': 'created', 'host': 'None'}
+2019-03-17 23:52:00 INFO     Slave successfully registered with master; started master timeout=5s
+2019-03-17 23:52:00 INFO     Slave has started running new task task0
+2019-03-17 23:52:01 INFO     Received heartbeat message from master
+2019-03-17 23:52:01 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task0", "sleeptime": "18", "state": "created", "host": "None"}}
+2019-03-17 23:52:04 INFO     Received heartbeat message from master
+2019-03-17 23:52:04 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task0", "sleeptime": "18", "state": "created", "host": "None"}}
+2019-03-17 23:52:07 INFO     Received heartbeat message from master
+2019-03-17 23:52:07 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task0", "sleeptime": "18", "state": "created", "host": "None"}}
+2019-03-17 23:52:10 INFO     Received heartbeat message from master
+2019-03-17 23:52:10 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task0", "sleeptime": "18", "state": "created", "host": "None"}}
+2019-03-17 23:52:13 INFO     Received heartbeat message from master
+2019-03-17 23:52:13 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task0", "sleeptime": "18", "state": "created", "host": "None"}}
+2019-03-17 23:52:16 INFO     Received heartbeat message from master
+2019-03-17 23:52:16 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task0", "sleeptime": "18", "state": "created", "host": "None"}}
+2019-03-17 23:52:18 INFO     Slave has completed task task0
+2019-03-17 23:52:18 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:52:18 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:52:18 DEBUG    Slave received new task: {'taskname': 'task3', 'sleeptime': '14', 'state': 'created', 'host': 'None'}
+2019-03-17 23:52:18 INFO     Slave has started running new task task3
+2019-03-17 23:52:19 INFO     Received heartbeat message from master
+2019-03-17 23:52:19 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task3", "sleeptime": "14", "state": "created", "host": "None"}}
+2019-03-17 23:52:22 INFO     Received heartbeat message from master
+2019-03-17 23:52:22 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task3", "sleeptime": "14", "state": "created", "host": "None"}}
+2019-03-17 23:52:25 INFO     Received heartbeat message from master
+2019-03-17 23:52:25 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task3", "sleeptime": "14", "state": "created", "host": "None"}}
+2019-03-17 23:52:28 INFO     Received heartbeat message from master
+2019-03-17 23:52:28 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task3", "sleeptime": "14", "state": "created", "host": "None"}}
+2019-03-17 23:52:31 INFO     Received heartbeat message from master
+2019-03-17 23:52:31 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task3", "sleeptime": "14", "state": "created", "host": "None"}}
+2019-03-17 23:52:32 INFO     Slave has completed task task3
+2019-03-17 23:52:32 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:52:32 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:52:32 DEBUG    Slave received new task: {'taskname': 'task5', 'sleeptime': '15', 'state': 'created', 'host': 'None'}
+2019-03-17 23:52:32 INFO     Slave has started running new task task5
+2019-03-17 23:52:34 INFO     Received heartbeat message from master
+2019-03-17 23:52:34 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task5", "sleeptime": "15", "state": "created", "host": "None"}}
+2019-03-17 23:52:37 INFO     Received heartbeat message from master
+2019-03-17 23:52:37 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task5", "sleeptime": "15", "state": "created", "host": "None"}}
+2019-03-17 23:52:40 INFO     Received heartbeat message from master
+2019-03-17 23:52:40 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task5", "sleeptime": "15", "state": "created", "host": "None"}}
+2019-03-17 23:52:43 INFO     Received heartbeat message from master
+2019-03-17 23:52:43 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task5", "sleeptime": "15", "state": "created", "host": "None"}}
+[2019-03-17 23:52:45 +0000] [9] [INFO] Handling signal: term
+[2019-03-17 23:52:45 +0000] [11] [INFO] Worker exiting (pid: 11)
+2019-03-17 23:52:47 INFO     Slave has completed task task5
+2019-03-17 23:52:47 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:52:47 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:52:48 INFO     Master timed out!
+2019-03-17 23:52:48 INFO     Attempting to register with master
+2019-03-17 23:52:48 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:52:48 DEBUG    http://master:8000 "POST /slave HTTP/1.1" 200 106
+2019-03-17 23:52:48 INFO     Slave successfully registered with master; started master timeout=5s
+2019-03-17 23:52:53 INFO     Master timed out!
+2019-03-17 23:52:53 INFO     Attempting to register with master
+2019-03-17 23:52:53 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:52:53 DEBUG    http://master:8000 "POST /slave HTTP/1.1" 200 106
+2019-03-17 23:52:53 INFO     Slave successfully registered with master; started master timeout=5s
+[2019-03-17 23:53:13 +0000] [7] [INFO] Starting gunicorn 19.9.0
+[2019-03-17 23:53:13 +0000] [7] [INFO] Listening at: http://0.0.0.0:8888 (7)
+[2019-03-17 23:53:13 +0000] [7] [INFO] Using worker: sync
+[2019-03-17 23:53:13 +0000] [9] [INFO] Booting worker with pid: 9
+2019-03-17 23:53:13 INFO     Attempting to register with master
+2019-03-17 23:53:13 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:53:13 DEBUG    http://master:8000 "POST /slave HTTP/1.1" 200 106
+2019-03-17 23:53:13 INFO     Slave successfully registered with master; started master timeout=5s
+2019-03-17 23:53:18 INFO     Received heartbeat message from master
+2019-03-17 23:53:18 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:53:18 DEBUG    Slave received new task: {'taskname': 'task15', 'sleeptime': '8', 'state': 'created', 'host': 'None'}
+2019-03-17 23:53:18 INFO     Slave has started running new task task15
+2019-03-17 23:53:18 INFO     Received heartbeat message from master
+2019-03-17 23:53:18 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task15", "sleeptime": "8", "state": "created", "host": "None"}}
+2019-03-17 23:53:20 INFO     Received heartbeat message from master
+2019-03-17 23:53:20 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task15", "sleeptime": "8", "state": "created", "host": "None"}}
+2019-03-17 23:53:23 INFO     Received heartbeat message from master
+2019-03-17 23:53:23 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task15", "sleeptime": "8", "state": "created", "host": "None"}}
+2019-03-17 23:53:26 INFO     Received heartbeat message from master
+2019-03-17 23:53:26 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task15", "sleeptime": "8", "state": "created", "host": "None"}}
+2019-03-17 23:53:26 INFO     Slave has completed task task15
+2019-03-17 23:53:26 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:53:26 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:53:26 DEBUG    Slave received new task: {'taskname': 'task18', 'sleeptime': '17', 'state': 'created', 'host': 'None'}
+2019-03-17 23:53:26 INFO     Slave has started running new task task18
+2019-03-17 23:53:29 INFO     Received heartbeat message from master
+2019-03-17 23:53:29 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task18", "sleeptime": "17", "state": "created", "host": "None"}}
+2019-03-17 23:53:32 INFO     Received heartbeat message from master
+2019-03-17 23:53:32 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task18", "sleeptime": "17", "state": "created", "host": "None"}}
+2019-03-17 23:53:35 INFO     Received heartbeat message from master
+2019-03-17 23:53:35 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task18", "sleeptime": "17", "state": "created", "host": "None"}}
+2019-03-17 23:53:38 INFO     Received heartbeat message from master
+2019-03-17 23:53:38 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task18", "sleeptime": "17", "state": "created", "host": "None"}}
+2019-03-17 23:53:41 INFO     Received heartbeat message from master
+2019-03-17 23:53:41 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task18", "sleeptime": "17", "state": "created", "host": "None"}}
+2019-03-17 23:53:43 INFO     Slave has completed task task18
+2019-03-17 23:53:43 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:53:44 INFO     Received heartbeat message from master
+2019-03-17 23:53:44 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "DONE", "task": {"taskname": "task18", "sleeptime": "17", "state": "created", "host": "None"}}
+2019-03-17 23:53:44 INFO     Slave transitioning from DONE to READY
+2019-03-17 23:53:45 DEBUG    Slave received new task: {'taskname': 'task22', 'sleeptime': '14', 'state': 'created', 'host': 'None'}
+2019-03-17 23:53:45 INFO     Slave has started running new task task22
+2019-03-17 23:53:47 INFO     Received heartbeat message from master
+2019-03-17 23:53:47 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task22", "sleeptime": "14", "state": "created", "host": "None"}}
+2019-03-17 23:53:48 ERROR    ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))
+2019-03-17 23:53:52 INFO     Master timed out!
+2019-03-17 23:53:52 INFO     Attempting to register with master
+2019-03-17 23:53:52 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:53:52 ERROR    POST to master master failed:
+HTTPConnectionPool(host='master', port=8000): Max retries exceeded with url: /slave (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fedaacdb3c8>: Failed to establish a new connection: [Errno -2] Name does not resolve'))
+2019-03-17 23:53:57 INFO     Attempting to register with master
+2019-03-17 23:53:57 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:53:57 ERROR    POST to master master failed:
+HTTPConnectionPool(host='master', port=8000): Max retries exceeded with url: /slave (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fedaacdb2e8>: Failed to establish a new connection: [Errno -2] Name does not resolve'))
+2019-03-17 23:53:59 INFO     Slave has completed task task22
+2019-03-17 23:53:59 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:53:59 ERROR    HTTPConnectionPool(host='master', port=8000): Max retries exceeded with url: /scheduler/task_done (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fedaacdb400>: Failed to establish a new connection: [Errno -2] Name does not resolve'))
+2019-03-17 23:54:02 INFO     Attempting to register with master
+2019-03-17 23:54:02 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:54:02 ERROR    POST to master master failed:
+HTTPConnectionPool(host='master', port=8000): Max retries exceeded with url: /slave (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fedaacdb2b0>: Failed to establish a new connection: [Errno -2] Name does not resolve'))
+2019-03-17 23:54:07 INFO     Attempting to register with master
+2019-03-17 23:54:07 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:54:07 ERROR    POST to master master failed:
+HTTPConnectionPool(host='master', port=8000): Max retries exceeded with url: /slave (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fedaacdb470>: Failed to establish a new connection: [Errno -2] Name does not resolve'))
+2019-03-17 23:54:12 INFO     Attempting to register with master
+2019-03-17 23:54:12 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:54:12 ERROR    POST to master master failed:
+HTTPConnectionPool(host='master', port=8000): Max retries exceeded with url: /slave (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fedaacdb358>: Failed to establish a new connection: [Errno -2] Name does not resolve'))
+2019-03-17 23:54:17 INFO     Attempting to register with master
+2019-03-17 23:54:17 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:54:17 ERROR    POST to master master failed:
+HTTPConnectionPool(host='master', port=8000): Max retries exceeded with url: /slave (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fedaacdb550>: Failed to establish a new connection: [Errno -2] Name does not resolve'))
+2019-03-17 23:54:20 INFO     Received heartbeat message from master
+2019-03-17 23:54:20 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "DONE", "task": {"taskname": "task22", "sleeptime": "14", "state": "created", "host": "None"}}
+2019-03-17 23:54:20 INFO     Slave transitioning from DONE to READY
+2019-03-17 23:54:22 INFO     Attempting to register with master
+2019-03-17 23:54:22 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:54:22 DEBUG    http://master:8000 "POST /slave HTTP/1.1" 200 106
+2019-03-17 23:54:22 INFO     Slave successfully registered with master; started master timeout=5s
+2019-03-17 23:54:23 INFO     Received heartbeat message from master
+2019-03-17 23:54:23 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:54:26 INFO     Received heartbeat message from master
+2019-03-17 23:54:26 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:54:29 INFO     Received heartbeat message from master
+2019-03-17 23:54:29 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:54:32 INFO     Received heartbeat message from master
+2019-03-17 23:54:32 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:54:35 INFO     Received heartbeat message from master
+2019-03-17 23:54:35 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:54:38 INFO     Received heartbeat message from master
+2019-03-17 23:54:38 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:54:40 DEBUG    Slave received new task: {'taskname': 'task26', 'sleeptime': '17', 'state': 'killed', 'host': 'b2626a253379f3d85ffe4913e4a4c2f95511331d'}
+2019-03-17 23:54:40 INFO     Slave has started running new task task26
+2019-03-17 23:54:41 INFO     Received heartbeat message from master
+2019-03-17 23:54:41 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task26", "sleeptime": "17", "state": "killed", "host": "b2626a253379f3d85ffe4913e4a4c2f95511331d"}}
+2019-03-17 23:54:44 INFO     Received heartbeat message from master
+2019-03-17 23:54:44 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task26", "sleeptime": "17", "state": "killed", "host": "b2626a253379f3d85ffe4913e4a4c2f95511331d"}}
+2019-03-17 23:54:47 INFO     Received heartbeat message from master
+2019-03-17 23:54:47 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task26", "sleeptime": "17", "state": "killed", "host": "b2626a253379f3d85ffe4913e4a4c2f95511331d"}}
+2019-03-17 23:54:50 INFO     Received heartbeat message from master
+2019-03-17 23:54:50 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task26", "sleeptime": "17", "state": "killed", "host": "b2626a253379f3d85ffe4913e4a4c2f95511331d"}}
+2019-03-17 23:54:53 INFO     Received heartbeat message from master
+2019-03-17 23:54:53 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task26", "sleeptime": "17", "state": "killed", "host": "b2626a253379f3d85ffe4913e4a4c2f95511331d"}}
+2019-03-17 23:54:56 INFO     Received heartbeat message from master
+2019-03-17 23:54:56 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task26", "sleeptime": "17", "state": "killed", "host": "b2626a253379f3d85ffe4913e4a4c2f95511331d"}}
+2019-03-17 23:54:57 INFO     Slave has completed task task26
+2019-03-17 23:54:57 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:54:57 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:54:57 DEBUG    Slave received new task: {'taskname': 'task27', 'sleeptime': '11', 'state': 'created', 'host': 'None'}
+2019-03-17 23:54:57 INFO     Slave has started running new task task27
+2019-03-17 23:54:59 INFO     Received heartbeat message from master
+2019-03-17 23:54:59 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task27", "sleeptime": "11", "state": "created", "host": "None"}}
+2019-03-17 23:55:02 INFO     Received heartbeat message from master
+2019-03-17 23:55:02 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task27", "sleeptime": "11", "state": "created", "host": "None"}}
+2019-03-17 23:55:05 INFO     Received heartbeat message from master
+2019-03-17 23:55:05 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task27", "sleeptime": "11", "state": "created", "host": "None"}}
+2019-03-17 23:55:08 INFO     Slave has completed task task27
+2019-03-17 23:55:08 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:55:08 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:55:08 DEBUG    Slave received new task: {'taskname': 'task29', 'sleeptime': '6', 'state': 'created', 'host': 'None'}
+2019-03-17 23:55:08 INFO     Slave has started running new task task29
+2019-03-17 23:55:08 INFO     Received heartbeat message from master
+2019-03-17 23:55:08 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task29", "sleeptime": "6", "state": "created", "host": "None"}}
+2019-03-17 23:55:11 INFO     Received heartbeat message from master
+2019-03-17 23:55:11 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task29", "sleeptime": "6", "state": "created", "host": "None"}}
+2019-03-17 23:55:14 INFO     Slave has completed task task29
+2019-03-17 23:55:14 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:55:14 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:55:14 DEBUG    Slave received new task: {'taskname': 'task30', 'sleeptime': '12', 'state': 'created', 'host': 'None'}
+2019-03-17 23:55:14 ERROR    Attempted to run task in state  DONE
+2019-03-17 23:55:14 INFO     Slave could not start running new task task30
+2019-03-17 23:55:14 INFO     Attempting to register with master
+2019-03-17 23:55:14 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:55:14 DEBUG    http://master:8000 "POST /slave HTTP/1.1" 200 106
+2019-03-17 23:55:14 INFO     Slave successfully registered with master; started master timeout=5s
+2019-03-17 23:55:19 INFO     Master timed out!
+2019-03-17 23:55:19 INFO     Attempting to register with master
+2019-03-17 23:55:19 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:55:19 INFO     Received heartbeat message from master
+2019-03-17 23:55:19 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:55:19 DEBUG    Slave received new task: {'taskname': 'task30', 'sleeptime': '12', 'state': 'created', 'host': 'None'}
+2019-03-17 23:55:19 INFO     Slave has started running new task task30
+2019-03-17 23:55:19 DEBUG    http://master:8000 "POST /slave HTTP/1.1" 200 106
+2019-03-17 23:55:19 INFO     Slave successfully registered with master; started master timeout=5s
+2019-03-17 23:55:20 DEBUG    Slave received new task: {'taskname': 'task31', 'sleeptime': '5', 'state': 'created', 'host': 'None'}
+2019-03-17 23:55:20 ERROR    Attempted to run task in state  RUNNING
+2019-03-17 23:55:20 INFO     Slave could not start running new task task31
+2019-03-17 23:55:20 INFO     Attempting to register with master
+2019-03-17 23:55:20 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:55:20 DEBUG    http://master:8000 "POST /slave HTTP/1.1" 200 106
+2019-03-17 23:55:20 INFO     Slave successfully registered with master; started master timeout=5s
+2019-03-17 23:55:25 INFO     Master timed out!
+2019-03-17 23:55:25 INFO     Attempting to register with master
+2019-03-17 23:55:25 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:55:25 INFO     Received heartbeat message from master
+2019-03-17 23:55:25 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:55:25 INFO     Received heartbeat message from master
+2019-03-17 23:55:25 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:55:25 DEBUG    Slave received new task: {'taskname': 'task31', 'sleeptime': '5', 'state': 'created', 'host': 'None'}
+2019-03-17 23:55:25 INFO     Slave has started running new task task31
+2019-03-17 23:55:25 DEBUG    http://master:8000 "POST /slave HTTP/1.1" 200 106
+2019-03-17 23:55:25 INFO     Slave successfully registered with master; started master timeout=5s
+2019-03-17 23:55:30 INFO     Slave has completed task task31
+2019-03-17 23:55:30 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:55:30 INFO     Master timed out!
+2019-03-17 23:55:30 INFO     Attempting to register with master
+2019-03-17 23:55:30 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:55:30 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 500 141
+2019-03-17 23:55:30 DEBUG    http://master:8000 "POST /slave HTTP/1.1" 200 106
+2019-03-17 23:55:30 INFO     Slave successfully registered with master; started master timeout=5s
+2019-03-17 23:55:31 INFO     Slave has completed task task31
+2019-03-17 23:55:31 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:55:31 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:55:31 DEBUG    Slave received new task: {'taskname': 'task30', 'sleeptime': '12', 'state': 'killed', 'host': '5bf95f787f98cb13ebfa0103a467b60e86bfd0bf'}
+2019-03-17 23:55:31 INFO     Slave has started running new task task30
+2019-03-17 23:55:32 INFO     Received heartbeat message from master
+2019-03-17 23:55:32 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task30", "sleeptime": "12", "state": "killed", "host": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf"}}
+2019-03-17 23:55:35 INFO     Received heartbeat message from master
+2019-03-17 23:55:35 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task30", "sleeptime": "12", "state": "killed", "host": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf"}}
+2019-03-17 23:55:38 INFO     Received heartbeat message from master
+2019-03-17 23:55:38 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task30", "sleeptime": "12", "state": "killed", "host": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf"}}
+2019-03-17 23:55:41 INFO     Received heartbeat message from master
+2019-03-17 23:55:41 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task30", "sleeptime": "12", "state": "killed", "host": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf"}}
+2019-03-17 23:55:43 INFO     Slave has completed task task30
+2019-03-17 23:55:43 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:55:43 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:55:43 DEBUG    Slave received new task: {'taskname': 'task33', 'sleeptime': '13', 'state': 'created', 'host': 'None'}
+2019-03-17 23:55:43 INFO     Slave has started running new task task33
+2019-03-17 23:55:44 INFO     Received heartbeat message from master
+2019-03-17 23:55:44 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task33", "sleeptime": "13", "state": "created", "host": "None"}}
+2019-03-17 23:55:47 INFO     Received heartbeat message from master
+2019-03-17 23:55:47 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task33", "sleeptime": "13", "state": "created", "host": "None"}}
+2019-03-17 23:55:50 INFO     Received heartbeat message from master
+2019-03-17 23:55:50 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task33", "sleeptime": "13", "state": "created", "host": "None"}}
+2019-03-17 23:55:53 INFO     Received heartbeat message from master
+2019-03-17 23:55:53 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task33", "sleeptime": "13", "state": "created", "host": "None"}}
+2019-03-17 23:55:56 INFO     Slave has completed task task33
+2019-03-17 23:55:56 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:55:56 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:55:56 DEBUG    Slave received new task: {'taskname': 'task35', 'sleeptime': '2', 'state': 'created', 'host': 'None'}
+2019-03-17 23:55:56 INFO     Slave has started running new task task35
+2019-03-17 23:55:56 INFO     Received heartbeat message from master
+2019-03-17 23:55:56 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task35", "sleeptime": "2", "state": "created", "host": "None"}}
+2019-03-17 23:55:58 INFO     Slave has completed task task35
+2019-03-17 23:55:58 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:55:58 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:55:58 DEBUG    Slave received new task: {'taskname': 'task36', 'sleeptime': '7', 'state': 'created', 'host': 'None'}
+2019-03-17 23:55:58 INFO     Slave has started running new task task36
+2019-03-17 23:55:59 INFO     Received heartbeat message from master
+2019-03-17 23:55:59 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task36", "sleeptime": "7", "state": "created", "host": "None"}}
+2019-03-17 23:56:02 INFO     Received heartbeat message from master
+2019-03-17 23:56:02 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task36", "sleeptime": "7", "state": "created", "host": "None"}}
+2019-03-17 23:56:05 INFO     Slave has completed task task36
+2019-03-17 23:56:05 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:56:05 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:56:05 DEBUG    Slave received new task: {'taskname': 'task38', 'sleeptime': '5', 'state': 'created', 'host': 'None'}
+2019-03-17 23:56:05 INFO     Slave has started running new task task38
+2019-03-17 23:56:05 INFO     Received heartbeat message from master
+2019-03-17 23:56:05 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task38", "sleeptime": "5", "state": "created", "host": "None"}}
+2019-03-17 23:56:08 INFO     Received heartbeat message from master
+2019-03-17 23:56:08 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task38", "sleeptime": "5", "state": "created", "host": "None"}}
+2019-03-17 23:56:10 INFO     Slave has completed task task38
+2019-03-17 23:56:10 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:56:10 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:56:10 DEBUG    Slave received new task: {'taskname': 'task40', 'sleeptime': '7', 'state': 'created', 'host': 'None'}
+2019-03-17 23:56:10 INFO     Slave has started running new task task40
+2019-03-17 23:56:11 INFO     Received heartbeat message from master
+2019-03-17 23:56:11 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task40", "sleeptime": "7", "state": "created", "host": "None"}}
+2019-03-17 23:56:14 INFO     Received heartbeat message from master
+2019-03-17 23:56:14 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task40", "sleeptime": "7", "state": "created", "host": "None"}}
+2019-03-17 23:56:17 INFO     Slave has completed task task40
+2019-03-17 23:56:17 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:56:17 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:56:17 DEBUG    Slave received new task: {'taskname': 'task42', 'sleeptime': '13', 'state': 'created', 'host': 'None'}
+2019-03-17 23:56:17 INFO     Slave has started running new task task42
+2019-03-17 23:56:17 INFO     Received heartbeat message from master
+2019-03-17 23:56:17 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task42", "sleeptime": "13", "state": "created", "host": "None"}}
+2019-03-17 23:56:20 INFO     Received heartbeat message from master
+2019-03-17 23:56:20 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task42", "sleeptime": "13", "state": "created", "host": "None"}}
+2019-03-17 23:56:23 INFO     Received heartbeat message from master
+2019-03-17 23:56:23 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task42", "sleeptime": "13", "state": "created", "host": "None"}}
+2019-03-17 23:56:26 INFO     Received heartbeat message from master
+2019-03-17 23:56:26 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task42", "sleeptime": "13", "state": "created", "host": "None"}}
+2019-03-17 23:56:29 INFO     Received heartbeat message from master
+2019-03-17 23:56:29 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task42", "sleeptime": "13", "state": "created", "host": "None"}}
+2019-03-17 23:56:30 INFO     Slave has completed task task42
+2019-03-17 23:56:30 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:56:30 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:56:30 DEBUG    Slave received new task: {'taskname': 'task47', 'sleeptime': '10', 'state': 'created', 'host': 'None'}
+2019-03-17 23:56:30 INFO     Slave has started running new task task47
+2019-03-17 23:56:32 INFO     Received heartbeat message from master
+2019-03-17 23:56:32 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task47", "sleeptime": "10", "state": "created", "host": "None"}}
+2019-03-17 23:56:35 INFO     Received heartbeat message from master
+2019-03-17 23:56:35 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task47", "sleeptime": "10", "state": "created", "host": "None"}}
+2019-03-17 23:56:38 INFO     Received heartbeat message from master
+2019-03-17 23:56:38 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task47", "sleeptime": "10", "state": "created", "host": "None"}}
+2019-03-17 23:56:40 INFO     Slave has completed task task47
+2019-03-17 23:56:40 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:56:40 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:56:40 DEBUG    Slave received new task: {'taskname': 'task49', 'sleeptime': '13', 'state': 'created', 'host': 'None'}
+2019-03-17 23:56:40 INFO     Slave has started running new task task49
+2019-03-17 23:56:41 INFO     Received heartbeat message from master
+2019-03-17 23:56:41 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task49", "sleeptime": "13", "state": "created", "host": "None"}}
+2019-03-17 23:56:44 INFO     Received heartbeat message from master
+2019-03-17 23:56:44 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task49", "sleeptime": "13", "state": "created", "host": "None"}}
+2019-03-17 23:56:47 INFO     Received heartbeat message from master
+2019-03-17 23:56:47 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task49", "sleeptime": "13", "state": "created", "host": "None"}}
+2019-03-17 23:56:50 INFO     Received heartbeat message from master
+2019-03-17 23:56:50 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task49", "sleeptime": "13", "state": "created", "host": "None"}}
+2019-03-17 23:56:53 INFO     Slave has completed task task49
+2019-03-17 23:56:53 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:56:53 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:56:53 DEBUG    Slave received new task: {'taskname': 'task55', 'sleeptime': '11', 'state': 'created', 'host': 'None'}
+2019-03-17 23:56:53 INFO     Slave has started running new task task55
+2019-03-17 23:56:53 INFO     Received heartbeat message from master
+2019-03-17 23:56:53 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task55", "sleeptime": "11", "state": "created", "host": "None"}}
+2019-03-17 23:56:56 INFO     Received heartbeat message from master
+2019-03-17 23:56:56 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task55", "sleeptime": "11", "state": "created", "host": "None"}}
+2019-03-17 23:56:59 INFO     Received heartbeat message from master
+2019-03-17 23:56:59 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task55", "sleeptime": "11", "state": "created", "host": "None"}}
+2019-03-17 23:57:02 INFO     Received heartbeat message from master
+2019-03-17 23:57:02 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task55", "sleeptime": "11", "state": "created", "host": "None"}}
+2019-03-17 23:57:04 INFO     Slave has completed task task55
+2019-03-17 23:57:04 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:57:04 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:57:04 DEBUG    Slave received new task: {'taskname': 'task58', 'sleeptime': '8', 'state': 'created', 'host': 'None'}
+2019-03-17 23:57:04 INFO     Slave has started running new task task58
+2019-03-17 23:57:05 INFO     Received heartbeat message from master
+2019-03-17 23:57:05 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task58", "sleeptime": "8", "state": "created", "host": "None"}}
+2019-03-17 23:57:08 INFO     Received heartbeat message from master
+2019-03-17 23:57:08 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task58", "sleeptime": "8", "state": "created", "host": "None"}}
+2019-03-17 23:57:11 INFO     Received heartbeat message from master
+2019-03-17 23:57:11 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task58", "sleeptime": "8", "state": "created", "host": "None"}}
+2019-03-17 23:57:12 INFO     Slave has completed task task58
+2019-03-17 23:57:12 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:57:12 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:57:12 DEBUG    Slave received new task: {'taskname': 'task62', 'sleeptime': '14', 'state': 'created', 'host': 'None'}
+2019-03-17 23:57:12 INFO     Slave has started running new task task62
+2019-03-17 23:57:14 INFO     Received heartbeat message from master
+2019-03-17 23:57:14 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task62", "sleeptime": "14", "state": "created", "host": "None"}}
+2019-03-17 23:57:17 INFO     Received heartbeat message from master
+2019-03-17 23:57:17 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task62", "sleeptime": "14", "state": "created", "host": "None"}}
+2019-03-17 23:57:20 INFO     Received heartbeat message from master
+2019-03-17 23:57:20 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task62", "sleeptime": "14", "state": "created", "host": "None"}}
+2019-03-17 23:57:23 INFO     Received heartbeat message from master
+2019-03-17 23:57:23 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task62", "sleeptime": "14", "state": "created", "host": "None"}}
+2019-03-17 23:57:26 INFO     Slave has completed task task62
+2019-03-17 23:57:26 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:57:26 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:57:26 DEBUG    Slave received new task: {'taskname': 'task64', 'sleeptime': '6', 'state': 'created', 'host': 'None'}
+2019-03-17 23:57:26 INFO     Slave has started running new task task64
+2019-03-17 23:57:26 INFO     Received heartbeat message from master
+2019-03-17 23:57:26 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task64", "sleeptime": "6", "state": "created", "host": "None"}}
+2019-03-17 23:57:29 INFO     Received heartbeat message from master
+2019-03-17 23:57:29 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task64", "sleeptime": "6", "state": "created", "host": "None"}}
+2019-03-17 23:57:32 INFO     Slave has completed task task64
+2019-03-17 23:57:32 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:57:32 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:57:32 DEBUG    Slave received new task: {'taskname': 'task67', 'sleeptime': '20', 'state': 'created', 'host': 'None'}
+2019-03-17 23:57:32 INFO     Slave has started running new task task67
+2019-03-17 23:57:32 INFO     Received heartbeat message from master
+2019-03-17 23:57:32 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task67", "sleeptime": "20", "state": "created", "host": "None"}}
+2019-03-17 23:57:35 INFO     Received heartbeat message from master
+2019-03-17 23:57:35 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task67", "sleeptime": "20", "state": "created", "host": "None"}}
+2019-03-17 23:57:38 INFO     Received heartbeat message from master
+2019-03-17 23:57:38 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task67", "sleeptime": "20", "state": "created", "host": "None"}}
+2019-03-17 23:57:41 INFO     Received heartbeat message from master
+2019-03-17 23:57:41 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task67", "sleeptime": "20", "state": "created", "host": "None"}}
+2019-03-17 23:57:44 INFO     Received heartbeat message from master
+2019-03-17 23:57:44 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task67", "sleeptime": "20", "state": "created", "host": "None"}}
+2019-03-17 23:57:47 INFO     Received heartbeat message from master
+2019-03-17 23:57:47 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task67", "sleeptime": "20", "state": "created", "host": "None"}}
+2019-03-17 23:57:50 INFO     Received heartbeat message from master
+2019-03-17 23:57:50 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task67", "sleeptime": "20", "state": "created", "host": "None"}}
+2019-03-17 23:57:52 INFO     Slave has completed task task67
+2019-03-17 23:57:52 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:57:52 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:57:52 DEBUG    Slave received new task: {'taskname': 'task72', 'sleeptime': '6', 'state': 'created', 'host': 'None'}
+2019-03-17 23:57:52 INFO     Slave has started running new task task72
+2019-03-17 23:57:53 INFO     Received heartbeat message from master
+2019-03-17 23:57:53 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task72", "sleeptime": "6", "state": "created", "host": "None"}}
+2019-03-17 23:57:56 INFO     Received heartbeat message from master
+2019-03-17 23:57:56 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task72", "sleeptime": "6", "state": "created", "host": "None"}}
+2019-03-17 23:57:58 INFO     Slave has completed task task72
+2019-03-17 23:57:58 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:57:58 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:57:58 DEBUG    Slave received new task: {'taskname': 'task73', 'sleeptime': '7', 'state': 'created', 'host': 'None'}
+2019-03-17 23:57:58 INFO     Slave has started running new task task73
+2019-03-17 23:57:59 INFO     Received heartbeat message from master
+2019-03-17 23:57:59 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task73", "sleeptime": "7", "state": "created", "host": "None"}}
+2019-03-17 23:58:02 INFO     Received heartbeat message from master
+2019-03-17 23:58:02 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task73", "sleeptime": "7", "state": "created", "host": "None"}}
+2019-03-17 23:58:05 INFO     Slave has completed task task73
+2019-03-17 23:58:05 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:58:05 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:58:05 DEBUG    Slave received new task: {'taskname': 'task77', 'sleeptime': '15', 'state': 'created', 'host': 'None'}
+2019-03-17 23:58:05 INFO     Slave has started running new task task77
+2019-03-17 23:58:05 INFO     Received heartbeat message from master
+2019-03-17 23:58:05 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task77", "sleeptime": "15", "state": "created", "host": "None"}}
+2019-03-17 23:58:08 INFO     Received heartbeat message from master
+2019-03-17 23:58:08 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task77", "sleeptime": "15", "state": "created", "host": "None"}}
+2019-03-17 23:58:11 INFO     Received heartbeat message from master
+2019-03-17 23:58:11 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task77", "sleeptime": "15", "state": "created", "host": "None"}}
+2019-03-17 23:58:14 INFO     Received heartbeat message from master
+2019-03-17 23:58:14 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task77", "sleeptime": "15", "state": "created", "host": "None"}}
+2019-03-17 23:58:17 INFO     Received heartbeat message from master
+2019-03-17 23:58:17 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task77", "sleeptime": "15", "state": "created", "host": "None"}}
+2019-03-17 23:58:20 INFO     Slave has completed task task77
+2019-03-17 23:58:20 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:58:20 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:58:20 DEBUG    Slave received new task: {'taskname': 'task80', 'sleeptime': '16', 'state': 'created', 'host': 'None'}
+2019-03-17 23:58:20 INFO     Slave has started running new task task80
+2019-03-17 23:58:20 INFO     Received heartbeat message from master
+2019-03-17 23:58:20 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task80", "sleeptime": "16", "state": "created", "host": "None"}}
+2019-03-17 23:58:23 INFO     Received heartbeat message from master
+2019-03-17 23:58:23 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task80", "sleeptime": "16", "state": "created", "host": "None"}}
+2019-03-17 23:58:26 INFO     Received heartbeat message from master
+2019-03-17 23:58:26 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task80", "sleeptime": "16", "state": "created", "host": "None"}}
+2019-03-17 23:58:29 INFO     Received heartbeat message from master
+2019-03-17 23:58:29 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task80", "sleeptime": "16", "state": "created", "host": "None"}}
+2019-03-17 23:58:32 INFO     Received heartbeat message from master
+2019-03-17 23:58:32 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task80", "sleeptime": "16", "state": "created", "host": "None"}}
+2019-03-17 23:58:35 INFO     Received heartbeat message from master
+2019-03-17 23:58:35 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task80", "sleeptime": "16", "state": "created", "host": "None"}}
+2019-03-17 23:58:36 INFO     Slave has completed task task80
+2019-03-17 23:58:36 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:58:36 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:58:36 DEBUG    Slave received new task: {'taskname': 'task83', 'sleeptime': '10', 'state': 'killed', 'host': 'b2626a253379f3d85ffe4913e4a4c2f95511331d'}
+2019-03-17 23:58:36 INFO     Slave has started running new task task83
+2019-03-17 23:58:38 INFO     Received heartbeat message from master
+2019-03-17 23:58:38 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task83", "sleeptime": "10", "state": "killed", "host": "b2626a253379f3d85ffe4913e4a4c2f95511331d"}}
+2019-03-17 23:58:41 INFO     Received heartbeat message from master
+2019-03-17 23:58:41 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task83", "sleeptime": "10", "state": "killed", "host": "b2626a253379f3d85ffe4913e4a4c2f95511331d"}}
+2019-03-17 23:58:44 INFO     Received heartbeat message from master
+2019-03-17 23:58:44 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task83", "sleeptime": "10", "state": "killed", "host": "b2626a253379f3d85ffe4913e4a4c2f95511331d"}}
+2019-03-17 23:58:46 INFO     Slave has completed task task83
+2019-03-17 23:58:46 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:58:46 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:58:46 DEBUG    Slave received new task: {'taskname': 'task90', 'sleeptime': '6', 'state': 'created', 'host': 'None'}
+2019-03-17 23:58:46 INFO     Slave has started running new task task90
+2019-03-17 23:58:47 INFO     Received heartbeat message from master
+2019-03-17 23:58:47 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task90", "sleeptime": "6", "state": "created", "host": "None"}}
+2019-03-17 23:58:50 INFO     Received heartbeat message from master
+2019-03-17 23:58:50 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task90", "sleeptime": "6", "state": "created", "host": "None"}}
+2019-03-17 23:58:52 INFO     Slave has completed task task90
+2019-03-17 23:58:52 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:58:52 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:58:52 DEBUG    Slave received new task: {'taskname': 'task91', 'sleeptime': '17', 'state': 'created', 'host': 'None'}
+2019-03-17 23:58:52 INFO     Slave has started running new task task91
+2019-03-17 23:58:53 INFO     Received heartbeat message from master
+2019-03-17 23:58:53 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task91", "sleeptime": "17", "state": "created", "host": "None"}}
+2019-03-17 23:58:56 INFO     Received heartbeat message from master
+2019-03-17 23:58:56 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task91", "sleeptime": "17", "state": "created", "host": "None"}}
+2019-03-17 23:58:59 INFO     Received heartbeat message from master
+2019-03-17 23:58:59 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task91", "sleeptime": "17", "state": "created", "host": "None"}}
+2019-03-17 23:59:02 INFO     Received heartbeat message from master
+2019-03-17 23:59:02 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task91", "sleeptime": "17", "state": "created", "host": "None"}}
+2019-03-17 23:59:05 INFO     Received heartbeat message from master
+2019-03-17 23:59:05 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task91", "sleeptime": "17", "state": "created", "host": "None"}}
+2019-03-17 23:59:08 INFO     Received heartbeat message from master
+2019-03-17 23:59:08 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task91", "sleeptime": "17", "state": "created", "host": "None"}}
+2019-03-17 23:59:09 INFO     Slave has completed task task91
+2019-03-17 23:59:09 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:59:09 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:59:09 DEBUG    Slave received new task: {'taskname': 'task94', 'sleeptime': '18', 'state': 'created', 'host': 'None'}
+2019-03-17 23:59:09 INFO     Slave has started running new task task94
+2019-03-17 23:59:11 INFO     Received heartbeat message from master
+2019-03-17 23:59:11 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task94", "sleeptime": "18", "state": "created", "host": "None"}}
+2019-03-17 23:59:14 INFO     Received heartbeat message from master
+2019-03-17 23:59:14 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task94", "sleeptime": "18", "state": "created", "host": "None"}}
+2019-03-17 23:59:17 INFO     Received heartbeat message from master
+2019-03-17 23:59:17 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task94", "sleeptime": "18", "state": "created", "host": "None"}}
+2019-03-17 23:59:20 INFO     Received heartbeat message from master
+2019-03-17 23:59:20 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task94", "sleeptime": "18", "state": "created", "host": "None"}}
+2019-03-17 23:59:23 INFO     Received heartbeat message from master
+2019-03-17 23:59:23 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task94", "sleeptime": "18", "state": "created", "host": "None"}}
+2019-03-17 23:59:26 INFO     Received heartbeat message from master
+2019-03-17 23:59:26 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task94", "sleeptime": "18", "state": "created", "host": "None"}}
+2019-03-17 23:59:27 INFO     Slave has completed task task94
+2019-03-17 23:59:27 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:59:27 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:59:27 DEBUG    Slave received new task: {'taskname': 'task97', 'sleeptime': '2', 'state': 'created', 'host': 'None'}
+2019-03-17 23:59:27 INFO     Slave has started running new task task97
+2019-03-17 23:59:29 INFO     Slave has completed task task97
+2019-03-17 23:59:29 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:59:29 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:59:29 DEBUG    Slave received new task: {'taskname': 'task98', 'sleeptime': '8', 'state': 'created', 'host': 'None'}
+2019-03-17 23:59:29 INFO     Slave has started running new task task98
+2019-03-17 23:59:29 INFO     Received heartbeat message from master
+2019-03-17 23:59:29 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task98", "sleeptime": "8", "state": "created", "host": "None"}}
+2019-03-17 23:59:32 INFO     Received heartbeat message from master
+2019-03-17 23:59:32 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task98", "sleeptime": "8", "state": "created", "host": "None"}}
+2019-03-17 23:59:36 INFO     Received heartbeat message from master
+2019-03-17 23:59:36 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "RUNNING", "task": {"taskname": "task98", "sleeptime": "8", "state": "created", "host": "None"}}
+2019-03-17 23:59:37 INFO     Slave has completed task task98
+2019-03-17 23:59:37 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-17 23:59:37 DEBUG    http://master:8000 "POST /scheduler/task_done HTTP/1.1" 200 0
+2019-03-17 23:59:39 INFO     Received heartbeat message from master
+2019-03-17 23:59:39 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:59:42 INFO     Received heartbeat message from master
+2019-03-17 23:59:42 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:59:45 INFO     Received heartbeat message from master
+2019-03-17 23:59:45 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:59:48 INFO     Received heartbeat message from master
+2019-03-17 23:59:48 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:59:51 INFO     Received heartbeat message from master
+2019-03-17 23:59:51 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:59:54 INFO     Received heartbeat message from master
+2019-03-17 23:59:54 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-17 23:59:57 INFO     Received heartbeat message from master
+2019-03-17 23:59:57 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-18 00:00:00 INFO     Received heartbeat message from master
+2019-03-18 00:00:00 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-18 00:00:03 INFO     Received heartbeat message from master
+2019-03-18 00:00:03 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-18 00:00:06 INFO     Received heartbeat message from master
+2019-03-18 00:00:06 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-18 00:00:09 INFO     Received heartbeat message from master
+2019-03-18 00:00:09 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-18 00:00:12 INFO     Received heartbeat message from master
+2019-03-18 00:00:12 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-18 00:00:15 INFO     Received heartbeat message from master
+2019-03-18 00:00:15 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-18 00:00:18 INFO     Received heartbeat message from master
+2019-03-18 00:00:18 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-18 00:00:21 INFO     Received heartbeat message from master
+2019-03-18 00:00:21 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-18 00:00:24 INFO     Received heartbeat message from master
+2019-03-18 00:00:24 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-18 00:00:27 INFO     Received heartbeat message from master
+2019-03-18 00:00:27 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-18 00:00:30 INFO     Received heartbeat message from master
+2019-03-18 00:00:30 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+2019-03-18 00:00:33 INFO     Received heartbeat message from master
+2019-03-18 00:00:33 DEBUG    {"hash": "5bf95f787f98cb13ebfa0103a467b60e86bfd0bf", "url": "http://2ffecf3d9dc4:8888/", "state": "READY", "task": []}
+[2019-03-18 00:00:34 +0000] [7] [INFO] Handling signal: term
+[2019-03-18 00:00:34 +0000] [9] [INFO] Worker exiting (pid: 9)
+2019-03-18 00:00:38 INFO     Master timed out!
+2019-03-18 00:00:38 INFO     Attempting to register with master
+2019-03-18 00:00:38 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-18 00:00:38 DEBUG    http://master:8000 "POST /slave HTTP/1.1" 200 106
+2019-03-18 00:00:38 INFO     Slave successfully registered with master; started master timeout=5s
+2019-03-18 00:00:43 INFO     Master timed out!
+2019-03-18 00:00:43 INFO     Attempting to register with master
+2019-03-18 00:00:43 DEBUG    Starting new HTTP connection (1): master:8000
+2019-03-18 00:00:43 DEBUG    http://master:8000 "POST /slave HTTP/1.1" 200 106
+2019-03-18 00:00:43 INFO     Slave successfully registered with master; started master timeout=5s
