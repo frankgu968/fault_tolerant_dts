@@ -176,7 +176,11 @@ class Scheduler:
     @staticmethod
     def handle_task_complete(task_name, slave_hash):
         logging.info("Slave " + slave_hash + " completed task " + task_name)
-        slave = Slave.objects.get(hash=slave_hash)
-        slave.update(hash=slave_hash, state="READY")
-        task = Task.objects.get(taskname=task_name)
-        task.update(state="success", host=slave_hash)
+        try:
+            slave = Slave.objects.get(hash=slave_hash)
+            slave.update(hash=slave_hash, state="READY")
+            task = Task.objects.get(taskname=task_name)
+            task.update(state="success", host=slave_hash)
+        except DoesNotExist as e:
+            logging.warning("Tried to remove non-existent entry. A rogue slave possibly reponded...")
+            logging.warning(str(e))
