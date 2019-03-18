@@ -2,6 +2,13 @@
 Author: Frank Gu  
 Date: Mar 17, 2019
 
+## Usage
+To run the stack, simply run `run.sh` in the source directory :)
+
+This script will create the mongodb, 1 master and 3 slaves, and seed the mongodb with 100 tasks with random sleeptimes between 1 and 20 seconds.  
+The master's API server is exposed on `http://localhost:8000`.  
+The scheduler is started by default, but you can start/stop the scheduler manually by making a HTTP POST to `http://localhost:8000/scheduler/[start | stop]`
+
 ## Overview
 This proof-of-concept fault tolerant distributed task scheduler is composed of **three** components:                
 
@@ -124,12 +131,10 @@ On slave start-up or master timeout, the slave will call its `register` function
 ##### Runner
 On master task assignment POST, the API server will spool a thread, which forks a subprocess running the `sleep` command. The thread, which has access to the slave attributes, acts as the monitor for the process and updates the slave's state(s) accordingly. The process can then be safely forked from the slave and run isolated.
 
-## Usage
-To run the stack, simply run `run.sh` in the source directory :)
+## Future Work 
+This repository is missing automated tests. I had spent a tad too long researching and familiarizing myself with the frameworks (hadn't worked with Falcon and mongoengine before...) and ran out of time to implement the them. The functionality of the current codebase is tested manually, but the automation should be implemented for future extensibility. 
 
-This script will create the mongodb, 1 master and 3 slaves, and seed the mongodb with 100 tasks with random sleeptimes between 1 and 20 seconds.  
-The master's API server is exposed on `http://localhost:8000`.  
-The scheduler is started by default, but you can start/stop the scheduler manually by making a HTTP POST to `http://localhost:8000/scheduler/[start | stop]`
+This setup would ideally be deployed onto a Kubernetes cluster with a "Deployment" of slave pods (replica: 3) and a Deployment of the master with the master container and mongodb container in 1 pod for tight coupling. The slaves can then be exposed by a ClusterIP service to the master. The master API can be exposed externally through a NodePort or LoadBalancer depending on cloud provider. 
 
 ## API Reference
 ### Master
